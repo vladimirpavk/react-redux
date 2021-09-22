@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    counter: 0
+    
 }
 
 const reducer = (state=INITIAL_STATE, action)=>{
