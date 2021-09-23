@@ -1,15 +1,24 @@
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import classes from './Counter.module.css';
 
+import { counterActions } from '../store/reducers/counterSlice';
+
 const Counter = (props) => {
+  /* const dispatch = useDispatch(); */
+
   const toggleCounterHandler = () => {   
-    props.increment();
+     props.increment();
   };
 
   const showValue = ()=>{
-    console.log(props.counterValue);
+    //console.log(props.counterValue.counter);
+    console.log(props);
+  }
+
+  const incrementBy5 = ()=>{
+    props.increase(5);
   }
 
   return (
@@ -17,6 +26,7 @@ const Counter = (props) => {
       <h1>Redux Counter</h1>
       <div className={classes.value}>{props.counterValue}</div>
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
+      <button onClick={incrementBy5}>Increment by 5</button>
       <button onClick={showValue}>Show value</button>
     </main>
   );
@@ -24,16 +34,16 @@ const Counter = (props) => {
 
 const mapStateToProps = (state)=>{
   return{
-    'counterValue': state.counter
+    'counterValue': state.counter.value
   }
 }
 
 const mapDispatchToProps = (dispatch)=>{
   return{
-    'increment': ()=>dispatch({
-      type:'increment'
-    })
+    'increment': ()=>dispatch(counterActions.increment()),
+    'increase': (value)=>dispatch(counterActions.increase(value))
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+/* export default connect(mapStateToProps, { increment })(Counter); */
