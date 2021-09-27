@@ -31,7 +31,6 @@ const Auth = (props) => {
 const mapDispatchToProps = (dispatch)=>{
     return{
       'login': (user, pass)=>{
-        console.log('map',user, pass);
         dispatch(loginActions.logIn({
           username: user,
           password: pass

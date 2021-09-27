@@ -6,10 +6,8 @@ const loginSlice = createSlice({
         isLoggedIn: false
     },
     reducers:{
-        logIn: (state, payload)=>{
-
-            //console.log('Credentials valid.', payload.username, payload.password);
-            console.log(payload.payload.username, payload.payload.password);
+        logIn: (state, action)=>{            
+            console.log(action.payload.username, action.payload.password);
             return {
                 isLoggedIn: true
             }
@@ -22,7 +20,6 @@ const loginSlice = createSlice({
         }
     }
 });
-console.log(loginSlice);
 
 export const loginActions = loginSlice.actions
 export default loginSlice.reducer;
