@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
+import { useEffect } from 'react';
+
+import PopulateDb from './PopulateDatabase/PopulateDatabase';
 
 import { loginActions } from '../store/reducers/loginSlice';
+
 import classes from './Auth.module.css';
 
 const Auth = (props) => {
@@ -8,6 +12,19 @@ const Auth = (props) => {
     eventData.preventDefault();    
     props.login(eventData.target[0].value, eventData.target[1].value);
   }
+
+  useEffect(()=>{
+    fetch('https://meals-f92cb-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+      .then(
+        (response)=>response.json()
+      )
+      .then(
+        (data)=>console.log(data)
+      )
+      .catch(
+        (ex)=>console.log(ex)
+      )
+  }, []);
 
   return (    
     <main className={classes.auth}>
@@ -23,6 +40,7 @@ const Auth = (props) => {
           </div>
           <button type="submit">Login</button>
         </form>
+        <PopulateDb />
       </section>
     </main>
   );
