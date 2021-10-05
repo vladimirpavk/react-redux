@@ -10,26 +10,12 @@ import Header from './components/Header';
 import UserProfile from './components/UserProfile';
 
 function App(props) {
-  console.log('App', db);
-
-  /* useEffect(() => {  
-    addDoc(collection(db, "users"), {
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815
-      }).then(
-        (newDoc)=>console.group(newDoc)  
-      ).catch(
-        (error)=>console.log(error)
-      );
-  }, []); */
-
   return (   
     <Fragment>
       {
         props.isLoggedIn ?
         <Fragment>
-            <Header />
+            <Header/>
             <UserProfile />
         </Fragment> : <Auth />  
       }

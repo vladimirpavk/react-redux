@@ -1,43 +1,33 @@
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
-
+import { useState} from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 import db from '../db/db';
-
 import PopulateDb from './PopulateDatabase/PopulateDatabase';
-
 import { loginActions } from '../store/reducers/loginSlice';
 
 import classes from './Auth.module.css';
 
-const Auth = (props) => {
+const Auth = (props) => { 
+
+  const [showError, setShowError] = useState(false);
+
   const onFormSubmitted = (eventData)=>{
     eventData.preventDefault();    
-    /* props.login(eventData.target[0].value, eventData.target[1].value); */
 
     const usersRef = collection(db, 'users');    
-    const q = query(usersRef, where("username", "==", eventData.target[0].value));
+    const q = query(usersRef, where("username", "==", eventData.target[0].value), where("password", "==", eventData.target[1].value)).select('username');
     getDocs(q).then(docs=>{
-      console.log('length', docs);
-      docs.forEach(doc => console.log('doc', doc.data()))
+      setShowError(docs.empty);
+      if(!docs.empty){
+        docs.forEach(doc => {
+          //if there is any, there is only one document
+          //console.log(doc.data());
+          props.login(doc.data());
+        })
+      }    
     }).catch(e=>console.log(e));
-
-    //console.log('query', q, eventData.target[0].value);
   }
-
-/*   useEffect(()=>{
-    fetch('https://meals-f92cb-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-      .then(
-        (response)=>response.json()
-      )
-      .then(
-        (data)=>console.log(data)
-      )
-      .catch(
-        (ex)=>console.log(ex)
-      )
-  }, []); */
 
   return (    
     <main className={classes.auth}>
@@ -52,6 +42,9 @@ const Auth = (props) => {
             <input type='password' id='password' />
           </div>
           <button type="submit">Login</button>
+          {
+            showError ?<p className={classes.errorLabel}>* Login error. Please re-enter username and password.</p> : null
+          }          
         </form>
         <PopulateDb />
       </section>
@@ -61,19 +54,18 @@ const Auth = (props) => {
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-      'login': (user, pass)=>{
+      'login': (user)=>{
         dispatch(loginActions.logIn({
-          username: user,
-          password: pass
+          user: user
         }))
       }
     }
 }
 
 const mapStateToProps = (state)=>{
-  return{
-
-  }
+   return{
+     
+   }
 }
 
 
