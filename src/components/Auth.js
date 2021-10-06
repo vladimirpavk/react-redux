@@ -16,7 +16,7 @@ const Auth = (props) => {
     eventData.preventDefault();    
 
     const usersRef = collection(db, 'users');    
-    const q = query(usersRef, where("username", "==", eventData.target[0].value), where("password", "==", eventData.target[1].value)).select('username');
+    const q = query(usersRef, where("username", "==", eventData.target[0].value), where("password", "==", eventData.target[1].value));
     getDocs(q).then(docs=>{
       setShowError(docs.empty);
       if(!docs.empty){

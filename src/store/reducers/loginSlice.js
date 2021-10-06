@@ -8,14 +8,12 @@ const loginSlice = createSlice({
     },
     reducers:{
         logIn: (state, action)=>{            
-            console.log(action.payload.user);
             return {
                 isLoggedIn: true,      
                 authLevels: action.payload.user.auth          
             }
         },
         logOut: (state)=>{
-            console.log('Logged out...');
             return {
                 isLoggedIn: false
             }
