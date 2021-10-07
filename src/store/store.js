@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore, combineReducers } from 'redux';
 
-import counterReducer from './reducers/counterSlice';
-import loginReducer from './reducers/loginSlice';
+import counterReducer from './reducers/couterReducer';
+import loginReducer from './reducers/loginReducer';
 
-const store = configureStore({
-    reducer: {
-        counter: counterReducer,
-        logIn: loginReducer
-    }
-});
+const rootReducer = combineReducers({counterReducer, loginReducer});
+
+const store = createStore(rootReducer);
 
 export default store;
+
+console.log('store state...', store.getState());
+console.log('store state...', store.getState());

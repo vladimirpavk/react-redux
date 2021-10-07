@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { loginActions } from '../store/reducers/loginSlice';
-
 import classes from './Header.module.css';
 
 const Header = (props) => {
@@ -92,14 +90,14 @@ const Header = (props) => {
 const mapDispatchToProps = (dispatch)=>{
   return{    
     'logOut': ()=>{
-      dispatch(loginActions.logOut());
+      dispatch({type: 'logOut'});
     }
   }
 }
 
 const mapStateToProps = (state)=>{
   return{
-    'authLevels': state.logIn.authLevels
+    'authLevels': state.loginReducer.authLevels
   }
 }
 

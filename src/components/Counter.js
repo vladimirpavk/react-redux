@@ -1,9 +1,6 @@
-import { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import classes from './Counter.module.css';
-
-import { counterActions } from '../store/reducers/counterSlice';
 
 const Counter = (props) => {
   /* const dispatch = useDispatch(); */
@@ -34,16 +31,15 @@ const Counter = (props) => {
 
 const mapStateToProps = (state)=>{
   return{
-    'counterValue': state.counter.value
+    'counterValue': state.counterReducer.value
   }
 }
 
 const mapDispatchToProps = (dispatch)=>{
   return{
-    'increment': ()=>dispatch(counterActions.increment()),
-    'increase': (value)=>dispatch(counterActions.increase(value))
+    'increment': ()=>dispatch({type: 'increment'}),
+    'increase': (value)=>dispatch({type: 'increase', value:value})
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
-/* export default connect(mapStateToProps, { increment })(Counter); */

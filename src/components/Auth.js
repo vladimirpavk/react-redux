@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import { useState} from 'react';
+import { useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 import db from '../db/db';
 import PopulateDb from './PopulateDatabase/PopulateDatabase';
-import { loginActions } from '../store/reducers/loginSlice';
 
 import classes from './Auth.module.css';
 
@@ -54,10 +53,11 @@ const Auth = (props) => {
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-      'login': (user)=>{
-        dispatch(loginActions.logIn({
-          user: user
-        }))
+      'logIn': (user)=>{
+        dispatch({
+          type: 'logIn',
+          value: user
+        })
       }
     }
 }

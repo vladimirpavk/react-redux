@@ -1,8 +1,5 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { collection, addDoc } from "firebase/firestore"; 
-
-import db from './db/db';
 
 import Counter from './components/Counter';
 import Auth from './components/Auth';
@@ -26,7 +23,7 @@ function App(props) {
 
 const mapStateToProps = (state)=>{
   return{
-    'isLoggedIn': state.logIn.isLoggedIn
+    'isLoggedIn': state.loginReducer.isLoggedIn
   }
 }
 
