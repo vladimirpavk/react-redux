@@ -9,6 +9,7 @@ import UserProfile from './components/UserProfile';
 import { loginAction, logoutAction } from './store/reducers/loginReducer';
 
 function App(props) {
+  console.log('App', props);
   return (   
     <Fragment>
       {
@@ -25,7 +26,7 @@ function App(props) {
 
 const mapStateToProps = (state)=>{
   return{
-    'isLoggedIn': state.login.isLoggedIn
+    'isLoggedIn': state
   }
 }
 

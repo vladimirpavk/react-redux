@@ -8,6 +8,16 @@ const INITIAL_STATE = {
     authLevels: []
 }
 
+const loginReducer = (state=INITIAL_STATE, action)=>{
+    switch(action.type){
+        
+        
+        default:{
+            return state;
+        }
+    }    
+}
+
 const loginReducer = createSlice({
     name: 'login',
     INITIAL_STATE,

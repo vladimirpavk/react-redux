@@ -5,8 +5,8 @@ import loginReducer from './reducers/loginReducer';
 
 const store = configureStore({
     reducer:{
-        counterReducer: counterReducer,
-        loginReducer: loginReducer
+        'counterReducer': counterReducer,
+        'loginReducer': loginReducer
     }    
 });
 
