@@ -5,7 +5,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import db from '../db/db';
 import PopulateDb from './PopulateDatabase/PopulateDatabase';
 
-import { logInAC } from '../store/reducers/loginReducer';
+import { logInAC } from '../store/reducers/loginSlice';
 
 import classes from './Auth.module.css';
 

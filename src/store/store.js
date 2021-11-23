@@ -1,12 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
-import counterReducer from './reducers/couterReducer';
-import loginReducer from './reducers/loginReducer';
+import counterReducer from './reducers/counterSlice';
+import loginReducer from './reducers/loginSlice';
+
+console.log(loginReducer);
 
 const store = configureStore({
-    reducer:{
-        'counterReducer': counterReducer,
-        'loginReducer': loginReducer
+    reducer: {        
+            'loginReducer': loginReducer,
+            'counterReducer': counterReducer                  
     }    
 });
 

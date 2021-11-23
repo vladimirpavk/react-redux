@@ -8,19 +8,9 @@ const INITIAL_STATE = {
     authLevels: []
 }
 
-const loginReducer = (state=INITIAL_STATE, action)=>{
-    switch(action.type){
-        
-        
-        default:{
-            return state;
-        }
-    }    
-}
-
-const loginReducer = createSlice({
+const loginSlice = createSlice({
     name: 'login',
-    INITIAL_STATE,
+    initialState: INITIAL_STATE,
     reducers: {
         login(state, action) {
             return {
@@ -56,5 +46,5 @@ export const logInAC = (username, password)=>{
     }
 }
 
-export const { loginAction, logoutAction } = loginReducer.actions;
-export default loginReducer;
+export const { loginAction, logoutAction } = loginSlice.actions;
+export default loginSlice.reducer;

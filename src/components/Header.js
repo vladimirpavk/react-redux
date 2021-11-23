@@ -97,7 +97,7 @@ const mapDispatchToProps = (dispatch)=>{
 
 const mapStateToProps = (state)=>{
   return{
-    'authLevels': state.loginReducer.authLevels
+    'authLevels': state.authLevels
   }
 }
 
