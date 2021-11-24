@@ -5,7 +5,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import db from '../db/db';
 import PopulateDb from './PopulateDatabase/PopulateDatabase';
 
-import { logInAC } from '../store/reducers/loginSlice';
+import { loginAsync } from '../store/reducers/loginSlice';
 
 import classes from './Auth.module.css';
 
@@ -14,18 +14,7 @@ const Auth = (props) => {
 
   const onFormSubmitted = (eventData)=>{
     eventData.preventDefault();    
-    logInAC.target(eventData.target[0].value, eventData.target[1].value);
-   /*  const usersRef = collection(db, 'users');    
-    const q = query(usersRef, where("username", "==", eventData.target[0].value), where("password", "==", eventData.target[1].value));
-    getDocs(q).then(docs=>{
-      setShowError(docs.empty);
-      if(!docs.empty){
-        docs.forEach(doc => {
-          //if there is any, there is only one document        
-          props.login(doc.data());
-        })
-      }    
-    }).catch(e=>console.log(e)); */
+    props.loginAsync(eventData.target[0].value, eventData.target[1].value);
   }
 
   return (    
@@ -53,11 +42,8 @@ const Auth = (props) => {
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-      'login': (user)=>{
-        dispatch({
-          type: 'logIn',
-          value: user
-        })
+      'loginAsync': (username, password)=>{
+        dispatch(loginAsync(username, password))
       }
     }
 }
