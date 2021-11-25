@@ -27,21 +27,21 @@ const loginSlice = createSlice({
     }           
 });
 
-export const { loginAction, logoutAction } = loginSlice.actions;
+export const { login, logout } = loginSlice.actions;
+console.log('actions', loginSlice.actions);
 
 //login action creator
 export const loginAsync = (username, password)=>  
     dispatch=>{
-        console.log('dispatch');
         const usersRef = collection(db, 'users');   
-        const q = query(usersRef, where("username", "==", username), where("password", "==", password));
-        console.log(q);
-        getDocs(q).then(docs=>{ 
-          console.log(docs);
+        const q = query(usersRef, where("username", "==", username), where("password", "==", password));    
+        getDocs(q).then(docs=>{           
           if(!docs.empty){
+              console.log('docs not empty');
             docs.forEach(doc => {
               //if there is any, there is only one document 
-              dispatch(loginAction(doc.data()));            
+              console.log(doc.data());
+              dispatch(login(doc.data()));            
             })
           }    
         }).catch(e=>console.log(e));    
