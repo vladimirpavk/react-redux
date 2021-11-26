@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
 
 import db from '../db/db';
 import PopulateDb from './PopulateDatabase/PopulateDatabase';
@@ -11,6 +10,10 @@ import classes from './Auth.module.css';
 
 const Auth = (props) => {
   const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    setShowError(props.loginFailed);
+  }, [props.loginFailed])
 
   const onFormSubmitted = (eventData)=>{
     eventData.preventDefault();    
@@ -23,11 +26,11 @@ const Auth = (props) => {
         <form onSubmit={onFormSubmitted}>
           <div className={classes.control}>
             <label htmlFor='email'>Email</label>
-            <input type='email' id='email' />
+            <input type='email' id='email' defaultValue='vladimirpavk@fite-firma.com' />
           </div>
           <div className={classes.control}>
             <label htmlFor='password'>Password</label>
-            <input type='password' id='password' />
+            <input type='password' id='password' defaultValue='proba1pass' />
           </div>
           <button type="submit">Login</button>
           {
@@ -50,7 +53,7 @@ const mapDispatchToProps = (dispatch)=>{
 
 const mapStateToProps = (state)=>{
    return{
-     
+     'loginFailed': state.loginReducer.loginFailed
    }
 }
 

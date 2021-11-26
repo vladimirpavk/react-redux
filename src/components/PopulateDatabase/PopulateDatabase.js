@@ -20,9 +20,15 @@ const PopulateDatabase = (props)=>{
           ).catch(
             (ex)=>console.log('Error', ex)
           )});     */
-          Users.forEach(user=>{
+/*           Users.forEach(user=>{
             addDoc(collection(db, "users"), user).then(doc=>console.log(doc)).catch(e=>console.error(e))
-          });
+          }); */
+          
+         /*  Users.forEach(user=>{
+            addDoc(collection(db, "randomUsers"), user).then(doc=>console.log(doc)).catch(e=>console.error(e))
+          }); */
+
+          
     }
     return(
         <button onClick={populateDb}>Populate</button>

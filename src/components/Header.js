@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 import classes from './Header.module.css';
 
+import { logout } from '../store/reducers/loginSlice';
+
 const Header = (props) => {
   const [authMenu, setauthMenu] = useState('');
 
-  const logOutButtonClicked = ()=>{   
-    console.log(props.authLevels);
-    //props.logOut();
+  const logOutButtonClicked = ()=>{
+    props.logOut();
   }
 
   useEffect(() => {
@@ -90,14 +91,14 @@ const Header = (props) => {
 const mapDispatchToProps = (dispatch)=>{
   return{    
     'logOut': ()=>{
-      dispatch({type: 'logOut'});
+      dispatch(logout());
     }
   }
 }
 
 const mapStateToProps = (state)=>{
   return{
-    'authLevels': state.authLevels
+    'authLevels': state.loginReducer.authLevels
   }
 }
 

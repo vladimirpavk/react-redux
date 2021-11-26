@@ -5,6 +5,7 @@ import db from '../../db/db';
 
 const INITIAL_STATE = {
     isLoggedIn: false,
+    loginFailed: false,
     authLevels: []
 }
 
@@ -15,20 +16,27 @@ const loginSlice = createSlice({
         login(state, action) {
             return {
                 isLoggedIn: true,
-                authLevels: action.value.auth
+                loginFailed: false,
+                authLevels: action.payload.auth
             }
         },
         logout(state, action){
             return {
                 isLoggedIn: false,
+                loginFailed: false,
                 authLevels: []
             };
+        },
+        loginFailed(state){
+            return{
+                ...state,
+                loginFailed: true
+            }
         }
     }           
 });
 
-export const { login, logout } = loginSlice.actions;
-console.log('actions', loginSlice.actions);
+export const { login, logout, loginFailed } = loginSlice.actions;
 
 //login action creator
 export const loginAsync = (username, password)=>  
@@ -37,14 +45,17 @@ export const loginAsync = (username, password)=>
         const q = query(usersRef, where("username", "==", username), where("password", "==", password));    
         getDocs(q).then(docs=>{           
           if(!docs.empty){
-              console.log('docs not empty');
             docs.forEach(doc => {
               //if there is any, there is only one document 
-              console.log(doc.data());
               dispatch(login(doc.data()));            
             })
-          }    
-        }).catch(e=>console.log(e));    
+          }   
+          else{              
+            dispatch(loginFailed());
+          } 
+        }).catch(e=>{
+            console.error(e);
+        });    
 }
 
 export default loginSlice.reducer;
