@@ -6,7 +6,7 @@ import db from '../../db/db';
 const INITIAL_STATE = {
     isLoggedIn: false,
     loginFailed: false,
-    authLevels: []
+    userData: {}
 }
 
 const loginSlice = createSlice({
@@ -17,14 +17,14 @@ const loginSlice = createSlice({
             return {
                 isLoggedIn: true,
                 loginFailed: false,
-                authLevels: action.payload.auth
+                userData: action.payload
             }
         },
         logout(state, action){
             return {
                 isLoggedIn: false,
                 loginFailed: false,
-                authLevels: []
+                userData: {}
             };
         },
         loginFailed(state){
@@ -41,8 +41,8 @@ export const { login, logout, loginFailed } = loginSlice.actions;
 //login action creator
 export const loginAsync = (username, password)=>  
     dispatch=>{
-        const usersRef = collection(db, 'users');   
-        const q = query(usersRef, where("username", "==", username), where("password", "==", password));    
+        const usersRef = collection(db, 'randomUsers');   
+        const q = query(usersRef, where("login.username", "==", username), where("login.password", "==", password));    
         getDocs(q).then(docs=>{           
           if(!docs.empty){
             docs.forEach(doc => {

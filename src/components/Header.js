@@ -7,6 +7,7 @@ import { logout } from '../store/reducers/loginSlice';
 
 const Header = (props) => {
   const [authMenu, setauthMenu] = useState('');
+  const [userData, setUserData] = useState({});
 
   const logOutButtonClicked = ()=>{
     props.logOut();
@@ -63,11 +64,17 @@ const Header = (props) => {
       return retValue;
     });  
     setauthMenu(AuthMenu);
-  }, [props.authLevels])
+  }, [props.authLevels]);
+
+  useEffect(
+    ()=>{
+      setUserData(props.userData);      
+    }, [props.userData]
+  );
  
   return (
     <header className={classes.header}>
-      <h1>Redux Auth</h1>
+      <h1>Redux Auth - {props.userData.login.username}</h1>
       <nav>
         <ul>
           <li>
@@ -96,9 +103,11 @@ const mapDispatchToProps = (dispatch)=>{
   }
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state)=>{  
+  console.log(state.loginReducer.userData);
   return{
-    'authLevels': state.loginReducer.authLevels
+    'authLevels': state.loginReducer.userData.auth,
+    'userData': state.loginReducer.userData
   }
 }
 
