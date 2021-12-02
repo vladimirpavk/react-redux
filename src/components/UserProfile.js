@@ -16,7 +16,6 @@ const UserProfile = (props) => {
 };
 
 const mapStateToProps = (state)=>{  
-  console.log(state.loginReducer.userData);
   return{   
     'userData': state.loginReducer.userData
   }

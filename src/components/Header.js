@@ -18,7 +18,7 @@ const Header = (props) => {
       let retValue;
       switch(authLevel){
         case(0):{
-          retValue = <li key={Math.random()}>Auth0</li>
+          retValue = <li key={Math.random()}>List Users</li>
           break;
         }
         case(1):{
