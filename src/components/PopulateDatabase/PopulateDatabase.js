@@ -4,12 +4,15 @@ import db from '../../db/db';
 
 import { randomUsers } from '../../assets/randomUsers';
 
+import { createUser } from '../../db/auth';
+
 const getRandomInt = (max, base) => {
   return Math.floor(Math.random() * max) + base;
 }
 
 const PopulateDatabase = (props)=>{
-    const populateDb = ()=>{
+
+    const populateDb = async ()=>{
           const messedUsers = randomUsers.map(user=>{
             let newGenList = [];
              for(let y=0; y<getRandomInt(3, 1); y++){
@@ -27,7 +30,16 @@ const PopulateDatabase = (props)=>{
          //console.log(messedUsers);
 
         messedUsers.forEach(user=>{
-          addDoc(collection(db, "randomUsers"), user).then(doc=>console.log(doc)).catch(e=>console.error(e))
+          await createUser(user.email, user.login.password).then(
+            (registeredUser)=>{
+                //registeredUser.user.uid
+                addDoc(collection(db, "userData"), user).then(doc=>console.log(doc)).catch(e=>console.error(e))
+            }).catch(
+              (error)=>{
+                  console.log(error);
+              }
+          );
+         
         });
     }
     return(
