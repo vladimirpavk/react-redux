@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-import db from '../../db/db';
+import { dbStore } from '../../db/db';
 
 const INITIAL_STATE = {
     isLoggedIn: false,
@@ -41,7 +41,7 @@ export const { login, logout, loginFailed } = loginSlice.actions;
 //login action creator
 export const loginAsync = (username, password)=>  
     dispatch=>{
-        const usersRef = collection(db, 'randomUsers');   
+        const usersRef = collection(dbStore, 'randomUsers');   
         const q = query(usersRef, where("login.username", "==", username), where("login.password", "==", password));    
         getDocs(q).then(docs=>{           
           if(!docs.empty){

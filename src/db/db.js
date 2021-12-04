@@ -12,7 +12,5 @@ const firebaseApp = initializeApp({
     appId: "1:876325346027:web:04c5f4288cf58685cbfcae"
 });  
 
-const db = getFirestore(firebaseApp);
+export const dbStore = getFirestore(firebaseApp);
 export const auth = getAuth(firebaseApp);
-
-export default db;

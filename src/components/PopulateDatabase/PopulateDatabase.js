@@ -1,6 +1,6 @@
-import { collection, addDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 
-import db from '../../db/db';
+import { dbStore } from '../../db/db';
 
 import { randomUsers } from '../../assets/randomUsers';
 
@@ -27,21 +27,52 @@ const PopulateDatabase = (props)=>{
              }
           });
 
-         //console.log(messedUsers);
+         console.log(messedUsers.length);
 
-        messedUsers.forEach(user=>{
-          await createUser(user.email, user.login.password).then(
-            (registeredUser)=>{
-                //registeredUser.user.uid
-                addDoc(collection(db, "userData"), user).then(doc=>console.log(doc)).catch(e=>console.error(e))
-            }).catch(
-              (error)=>{
-                  console.log(error);
-              }
-          );
-         
-        });
-    }
+         let user = 0;
+
+         messedUsers.forEach(
+            user=>{
+              createUser(user.email, user.login.password).then(
+                registeredUser => {
+                  return{
+                    uid: registeredUser.user.uid,
+                    details: user
+                  }                                
+                }
+              ).then(
+                detailedUser => console.log(detailedUser)
+              )
+            }
+         )
+
+/*         messedUsers.forEach(async (user)=>{
+          try{
+            const registeredUser = await createUser(user.email, user.login.password);
+            console.log(registeredUser);
+
+            const userDetails = {
+              uid: registeredUser.user.uid,
+              details: user
+            };
+
+            try{
+              console.log('Add user details', userDetails);
+              addDoc(collection(db, "userData"), userDetails).then(
+                (newUser)=>console.log('newUser', newUser)
+              ).catch(
+                (exception)=>console.log(exception)
+              )              
+            }
+            catch(newuserDetailDocError){
+              console.error(newuserDetailDocError);
+            }
+          }
+          catch(registerUserError){
+            console.error(registerUserError);
+          }                                      
+    }); */
+  }
     return(
         <button onClick={populateDb}>Populate</button>
     )
