@@ -31,7 +31,52 @@ const PopulateDatabase = (props)=>{
 
          let user = 0;
 
-         messedUsers.forEach(
+         createUser(messedUsers[0].email, messedUsers[0].login.password).then(
+              registeredUser => {
+                return{
+                  uid: registeredUser.user.uid,
+                  details: messedUsers[0]
+                }                                
+              }
+            ).then(
+              detailedUser =>{
+                console.log(detailedUser);
+                addDoc(collection(dbStore, "userData"), detailedUser).then(
+                  (dUser)=>console.log(dUser)
+                )
+            });                
+
+            createUser(messedUsers[1].email, messedUsers[1].login.password).then(
+              registeredUser => {
+                return{
+                  uid: registeredUser.user.uid,
+                  details: messedUsers[1]
+                }                                
+              }
+            ).then(
+              detailedUser =>{
+                console.log(detailedUser);
+                addDoc(collection(dbStore, "userData"), detailedUser).then(
+                  (dUser)=>console.log(dUser)
+                )
+            });      
+
+            createUser(messedUsers[2].email, messedUsers[2].login.password).then(
+              registeredUser => {
+                return{
+                  uid: registeredUser.user.uid,
+                  details: messedUsers[2]
+                }                                
+              }
+            ).then(
+              detailedUser =>{
+                console.log(detailedUser);
+                addDoc(collection(dbStore, "userData"), detailedUser).then(
+                  (dUser)=>console.log(dUser)
+                )
+            });      
+
+       /*   messedUsers.forEach(
             user=>{
               createUser(user.email, user.login.password).then(
                 registeredUser => {
@@ -41,10 +86,14 @@ const PopulateDatabase = (props)=>{
                   }                                
                 }
               ).then(
-                detailedUser => console.log(detailedUser)
-              )
+                detailedUser =>{
+                  console.log(detailedUser);
+                  addDoc(collection(dbStore, "userData"), detailedUser).then(
+                    (dUser)=>console.log(dUser)
+                  )
+                })
             }
-         )
+         ) */
 
 /*         messedUsers.forEach(async (user)=>{
           try{
