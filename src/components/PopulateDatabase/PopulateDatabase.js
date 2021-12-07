@@ -29,54 +29,22 @@ const PopulateDatabase = (props)=>{
 
          console.log(messedUsers.length);
 
-         let user = 0;
+         let detailedUsers = await Promise.all(messedUsers.map(
+          async (messedUser) => {
+            const createdUser = await createUser(messedUser.email, messedUser.login.password);             
+            const detailedUser = {
+                uid: createdUser.user.uid,
+                ...messedUser
+              }; 
+              return detailedUser;                   
+        }));
 
-         createUser(messedUsers[0].email, messedUsers[0].login.password).then(
-              registeredUser => {
-                return{
-                  uid: registeredUser.user.uid,
-                  details: messedUsers[0]
-                }                                
-              }
-            ).then(
-              detailedUser =>{
-                console.log(detailedUser);
-                addDoc(collection(dbStore, "userData"), detailedUser).then(
-                  (dUser)=>console.log(dUser)
-                )
-            });                
+        console.log('Initializing user detail collection...', detailedUsers)
 
-            createUser(messedUsers[1].email, messedUsers[1].login.password).then(
-              registeredUser => {
-                return{
-                  uid: registeredUser.user.uid,
-                  details: messedUsers[1]
-                }                                
-              }
-            ).then(
-              detailedUser =>{
-                console.log(detailedUser);
-                addDoc(collection(dbStore, "userData"), detailedUser).then(
-                  (dUser)=>console.log(dUser)
-                )
-            });      
-
-            createUser(messedUsers[2].email, messedUsers[2].login.password).then(
-              registeredUser => {
-                return{
-                  uid: registeredUser.user.uid,
-                  details: messedUsers[2]
-                }                                
-              }
-            ).then(
-              detailedUser =>{
-                console.log(detailedUser);
-                addDoc(collection(dbStore, "userData"), detailedUser).then(
-                  (dUser)=>console.log(dUser)
-                )
-            });      
-
-       /*   messedUsers.forEach(
+        detailedUsers.forEach(
+          
+        )
+         /* messedUsers.forEach(
             user=>{
               createUser(user.email, user.login.password).then(
                 registeredUser => {
@@ -94,33 +62,6 @@ const PopulateDatabase = (props)=>{
                 })
             }
          ) */
-
-/*         messedUsers.forEach(async (user)=>{
-          try{
-            const registeredUser = await createUser(user.email, user.login.password);
-            console.log(registeredUser);
-
-            const userDetails = {
-              uid: registeredUser.user.uid,
-              details: user
-            };
-
-            try{
-              console.log('Add user details', userDetails);
-              addDoc(collection(db, "userData"), userDetails).then(
-                (newUser)=>console.log('newUser', newUser)
-              ).catch(
-                (exception)=>console.log(exception)
-              )              
-            }
-            catch(newuserDetailDocError){
-              console.error(newuserDetailDocError);
-            }
-          }
-          catch(registerUserError){
-            console.error(registerUserError);
-          }                                      
-    }); */
   }
     return(
         <button onClick={populateDb}>Populate</button>
