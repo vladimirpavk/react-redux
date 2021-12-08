@@ -28,22 +28,62 @@ const PopulateDatabase = (props)=>{
           });
 
          console.log(messedUsers.length);
+         //simple example
+        const sleep = (interval)=>new Promise(
+          (resolve, reject)=>{
+            setTimeout(() => {
+              resolve();
+            }, interval);
+          }
+        )
 
-         let detailedUsers = await Promise.all(messedUsers.map(
+         let anyArray = [4, 7, 8];
+         let sumArray = 0;
+         anyArray.forEach(
+           async (element)=>{
+             console.log('before promise resolved...', element);
+             await sleep(500);
+             sumArray += element;
+             console.log('after promise resolved...', element);
+           }
+         );
+         console.log(sumArray);
+         
+/*          let newArray = anyArray.map(
+           async (element)=>{
+             console.log(element);
+             await sleep(1000);
+             console.log(element + 1);
+             return element + 1;
+           }
+         );
+         console.log(newArray); */
+
+/*          let detailedUsers = await Promise.all(messedUsers.map(
           async (messedUser) => {
             const createdUser = await createUser(messedUser.email, messedUser.login.password);             
             const detailedUser = {
                 uid: createdUser.user.uid,
                 ...messedUser
-              }; 
+              };               
               return detailedUser;                   
-        }));
+        })); */
+
+     /*  let detailedUsers = messedUsers.map(
+        async (messedUser) => {
+          const createdUser = await createUser(messedUser.email, messedUser.login.password);             
+          const detailedUser = {
+              uid: createdUser.user.uid,
+              ...messedUser
+            };               
+            return detailedUser;                   
+      });
 
         console.log('Initializing user detail collection...', detailedUsers)
 
         detailedUsers.forEach(
-          
-        )
+
+        ) */
          /* messedUsers.forEach(
             user=>{
               createUser(user.email, user.login.password).then(
