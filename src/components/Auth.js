@@ -37,7 +37,7 @@ const Auth = (props) => {
             showError ?<p className={classes.errorLabel}>* Login error. Please re-enter username and password.</p> : null
           }          
         </form>
-        <PopulateDb />
+       {/*  <PopulateDb /> */}
       </section>
     </main>
   );

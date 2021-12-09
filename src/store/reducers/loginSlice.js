@@ -38,8 +38,8 @@ const loginSlice = createSlice({
 
 export const { login, logout, loginFailed } = loginSlice.actions;
 
-//login action creator
-export const loginAsync = (username, password)=>  
+//login action creator -old version - switched to firebase.auth
+/* export const loginAsync = (username, password)=>  
     dispatch=>{
         const usersRef = collection(dbStore, 'randomUsers');   
         const q = query(usersRef, where("login.username", "==", username), where("login.password", "==", password));    
@@ -56,6 +56,12 @@ export const loginAsync = (username, password)=>
         }).catch(e=>{
             console.error(e);
         });    
+} */
+
+export const loginAsync = (username, password)=>{
+    (dispatch)=>{
+        //?
+    }
 }
 
 export default loginSlice.reducer;
