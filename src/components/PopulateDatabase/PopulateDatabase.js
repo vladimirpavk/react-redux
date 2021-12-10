@@ -28,7 +28,7 @@ const PopulateDatabase = (props)=>{
           });
 
 
-        let detailedUsers = await Promise.all(messedUsers.map(
+       /*  let detailedUsers = await Promise.all(messedUsers.map(
           async (messedUser) => {
             const createdUser = await createUser(messedUser.email, messedUser.login.password);             
             const detailedUser = {
@@ -36,17 +36,17 @@ const PopulateDatabase = (props)=>{
                 ...messedUser
               };               
               return detailedUser;                   
-        }));
+        })); */
    
 
-        console.log('Initializing user detail collection...', detailedUsers);
+        console.log('Initializing user detail collection...', messedUsers);
 
-        detailedUsers.forEach(
+       /*  detailedUsers.forEach(
           async (detailedUser)=>{
             const usersDetailsDocument = await addDoc(collection(dbStore, 'usersDetails'), detailedUser);
             console.log(usersDetailsDocument);
           }
-        );
+        ); */
   }
     return(
         <button onClick={populateDb}>Populate</button>

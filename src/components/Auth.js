@@ -30,14 +30,14 @@ const Auth = (props) => {
           </div>
           <div className={classes.control}>
             <label htmlFor='password'>Password</label>
-            <input type='password' id='password' defaultValue='proba1pass' />
+            <input type='password' id='password' defaultValue='ncc1701a' />
           </div>
           <button type="submit">Login</button>
           {
             showError ?<p className={classes.errorLabel}>* Login error. Please re-enter username and password.</p> : null
           }          
         </form>
-       {/*  <PopulateDb /> */}
+       { <PopulateDb />}
       </section>
     </main>
   );

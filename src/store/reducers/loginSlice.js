@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 import { dbStore } from '../../db/db';
+import { signInUser } from '../../db/auth';
+import { findUserDetailByUID } from '../../db/user';
 
 const INITIAL_STATE = {
     isLoggedIn: false,
@@ -58,10 +60,17 @@ export const { login, logout, loginFailed } = loginSlice.actions;
         });    
 } */
 
-export const loginAsync = (username, password)=>{
+export const loginAsync = (username, password)=>
+    
     (dispatch)=>{
-        //?
+        console.log(username, password);
+        signInUser(username, password).then(
+            (userCredential)=>{
+                console.log(userCredential);
+                findUserDetailByUID(userCredential.user.uid);
+                //dispatch(login())
+            }
+        )
     }
-}
 
 export default loginSlice.reducer;
