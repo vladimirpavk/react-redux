@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { collection, getDocs, query, where } from 'firebase/firestore';
 
-import { dbStore } from '../../db/db';
-import { signInUser } from '../../db/auth';
+import { 
+    signInUser,
+    signOutUser 
+} from '../../db/auth';
 import { findUserDetailByUID } from '../../db/user';
 
 const INITIAL_STATE = {
     isLoggedIn: false,
     loginFailed: false,
+    loginFailedErrorText: '',
     userData: {}
 }
 
@@ -17,22 +19,27 @@ const loginSlice = createSlice({
     reducers: {
         login(state, action) {
             return {
+                ...state,
                 isLoggedIn: true,
                 loginFailed: false,
+                loginFailedErrorText: '',
                 userData: action.payload
             }
         },
-        logout(state, action){
+        logout(state){
             return {
+                ...state,
                 isLoggedIn: false,
                 loginFailed: false,
+                loginFailedErrorText: '',
                 userData: {}
             };
         },
-        loginFailed(state){
+        loginFailed(state, action){
             return{
                 ...state,
-                loginFailed: true
+                loginFailed: true,
+                loginFailedErrorText: action.payload
             }
         }
     }           
@@ -40,37 +47,31 @@ const loginSlice = createSlice({
 
 export const { login, logout, loginFailed } = loginSlice.actions;
 
-//login action creator -old version - switched to firebase.auth
-/* export const loginAsync = (username, password)=>  
-    dispatch=>{
-        const usersRef = collection(dbStore, 'randomUsers');   
-        const q = query(usersRef, where("login.username", "==", username), where("login.password", "==", password));    
-        getDocs(q).then(docs=>{           
-          if(!docs.empty){
-            docs.forEach(doc => {
-              //if there is any, there is only one document 
-              dispatch(login(doc.data()));            
-            })
-          }   
-          else{              
-            dispatch(loginFailed());
-          } 
-        }).catch(e=>{
-            console.error(e);
-        });    
-} */
+export const logOutAsync = ()=>    
+    (dispatch)=>signOutUser().then(()=>dispatch(logout()))
 
-export const loginAsync = (username, password)=>
-    
+export const loginAsync = (username, password)=>    
     (dispatch)=>{
         console.log(username, password);
         signInUser(username, password).then(
             (userCredential)=>{
-                console.log(userCredential);
-                findUserDetailByUID(userCredential.user.uid);
+                //console.log(userCredential);
+                findUserDetailByUID(userCredential.user.uid).then(
+                    (detailedUser)=>{
+                        console.log(detailedUser);
+                        dispatch(login(detailedUser));
+                    }
+                )
                 //dispatch(login())
+            }
+        ).catch(
+            (error)=>{
+                //console.log('Something bad happened...', error.code, error.message)
+                dispatch(loginFailed(error.message));
             }
         )
     }
+
+
 
 export default loginSlice.reducer;

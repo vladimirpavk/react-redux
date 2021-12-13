@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import classes from './Header.module.css';
 
-import { logout } from '../store/reducers/loginSlice';
+/* import { logout } from '../store/reducers/loginSlice'; */
+import { logOutAsync } from '../store/reducers/loginSlice';
 
 const Header = (props) => {
   const [authMenu, setauthMenu] = useState('');
@@ -98,7 +99,7 @@ const Header = (props) => {
 const mapDispatchToProps = (dispatch)=>{
   return{    
     'logOut': ()=>{
-      dispatch(logout());
+      dispatch(logOutAsync());
     }
   }
 }

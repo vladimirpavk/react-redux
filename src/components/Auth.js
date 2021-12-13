@@ -10,10 +10,16 @@ import classes from './Auth.module.css';
 
 const Auth = (props) => {
   const [showError, setShowError] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
     setShowError(props.loginFailed);
-  }, [props.loginFailed])
+    setErrorText(props.loginFailedText);
+  }, [
+        props.loginFailed,
+        props.loginFailedText
+     ]
+  );
 
   const onFormSubmitted = (eventData)=>{
     eventData.preventDefault();    
@@ -34,10 +40,11 @@ const Auth = (props) => {
           </div>
           <button type="submit">Login</button>
           {
-            showError ?<p className={classes.errorLabel}>* Login error. Please re-enter username and password.</p> : null
+            /* showError ?<p className={classes.errorLabel}>* Login error. Please re-enter username and password.</p> : null */
+            showError ? <p className={classes.errorLabel}>* {props.loginFailedText}</p> : null
           }          
         </form>
-       { <PopulateDb />}
+       {/* { <PopulateDb />} */}
       </section>
     </main>
   );
@@ -53,7 +60,8 @@ const mapDispatchToProps = (dispatch)=>{
 
 const mapStateToProps = (state)=>{
    return{
-     'loginFailed': state.loginReducer.loginFailed
+     'loginFailed': state.loginReducer.loginFailed,
+     'loginFailedText': state.loginReducer.loginFailedErrorText
    }
 }
 
