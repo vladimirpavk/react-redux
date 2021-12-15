@@ -7,8 +7,10 @@ import {
 
 import { dbStore } from './db';
 
+const userDetailsRef = collection(dbStore, 'usersDetails');
+
 export const findUserDetailByUID = (uid)=>{
-    const userDetailsRef = collection(dbStore, 'usersDetails');
+    //const userDetailsRef = collection(dbStore, 'usersDetails');
     const userQuery = query(userDetailsRef, where('uid', '==', uid));
     
     return getDocs(userQuery).then(
@@ -24,4 +26,11 @@ export const findUserDetailByUID = (uid)=>{
             }
         }
     );
+}
+
+export const getAllUsersDetails = async ()=>{
+    const querySnapshot = await getDocs(userDetailsRef);
+    querySnapshot.forEach(
+        (userDetail)=>console.log(userDetail)
+    )
 }

@@ -12,7 +12,7 @@ function App(props) {
         props.isLoggedIn ?
         <Fragment>
             <Header/>
-            <UserProfile />
+            {/* <UserProfile /> */}
         </Fragment> : <Auth />  
       }          
     </Fragment>     

@@ -44,7 +44,7 @@ const Auth = (props) => {
             showError ? <p className={classes.errorLabel}>* {props.loginFailedText}</p> : null
           }          
         </form>
-       {/* { <PopulateDb />} */}
+       { <PopulateDb />}
       </section>
     </main>
   );

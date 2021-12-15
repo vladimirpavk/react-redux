@@ -6,6 +6,8 @@ import classes from './Header.module.css';
 /* import { logout } from '../store/reducers/loginSlice'; */
 import { logOutAsync } from '../store/reducers/loginSlice';
 
+import { getAllUsersDetails } from '../db/user';
+
 const Header = (props) => {
   const [authMenu, setauthMenu] = useState('');
   const [userData, setUserData] = useState({});
@@ -14,12 +16,16 @@ const Header = (props) => {
     props.logOut();
   }
 
+  const getAllUsers = ()=>{
+    getAllUsersDetails();
+  }
+
   useEffect(() => {
     let AuthMenu = props.authLevels.map(authLevel=>{  
       let retValue;
       switch(authLevel){
         case(0):{
-          retValue = <li key={Math.random()}>List Users</li>
+          retValue = <li key={Math.random()} onClick={getAllUsers} >List Users</li>
           break;
         }
         case(1):{
