@@ -17,7 +17,7 @@ const Header = (props) => {
   }
 
   const getAllUsers = ()=>{
-    getAllUsersDetails();
+   getAllUsersDetails();
   }
 
   useEffect(() => {

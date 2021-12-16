@@ -2,7 +2,9 @@ import {
     collection,
     query,
     where,
-    getDocs
+    getDocs,
+    doc,
+    getDoc
 } from 'firebase/firestore';
 
 import { dbStore } from './db';
@@ -33,4 +35,9 @@ export const getAllUsersDetails = async ()=>{
     querySnapshot.forEach(
         (userDetail)=>console.log(userDetail)
     )
+}
+
+export const getUserDocumentById = (documentId)=>{
+    const docRef = doc(dbStore, 'usersDetails', documentId);
+    return getDoc(docRef).then(userDocument => userDocument.data());
 }

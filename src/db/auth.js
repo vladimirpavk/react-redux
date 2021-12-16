@@ -10,7 +10,7 @@ import { auth } from './db';
 onAuthStateChanged(auth,
     (loggedUser)=>{
         if(loggedUser){
-            console.log('User logged in...')
+            console.log('User logged in...', loggedUser)
         }
         else{
             console.log('User logged out...');

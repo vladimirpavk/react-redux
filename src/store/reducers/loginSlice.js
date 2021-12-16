@@ -4,7 +4,10 @@ import {
     signInUser,
     signOutUser 
 } from '../../db/auth';
-import { findUserDetailByUID } from '../../db/user';
+import {
+    findUserDetailByUID,
+    getUserDocumentById
+} from '../../db/user';
 
 const INITIAL_STATE = {
     isLoggedIn: false,
@@ -55,14 +58,18 @@ export const loginAsync = (username, password)=>
         console.log(username, password);
         signInUser(username, password).then(
             (userCredential)=>{
-                //console.log(userCredential);
-                findUserDetailByUID(userCredential.user.uid).then(
+                /* findUserDetailByUID(userCredential.user.uid).then(
                     (detailedUser)=>{
                         console.log(detailedUser);
                         dispatch(login(detailedUser));
                     }
+                ) */
+                getUserDocumentById(userCredential.user.uid).then(
+                    (userDetailsDocument)=>{
+                        console.log(userDetailsDocument);
+                        dispatch(login(userDetailsDocument));
+                    }
                 )
-                //dispatch(login())
             }
         ).catch(
             (error)=>{
