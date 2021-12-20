@@ -5,7 +5,6 @@ import {
     signOutUser 
 } from '../../db/auth';
 import {
-    findUserDetailByUID,
     getUserDocumentById
 } from '../../db/user';
 

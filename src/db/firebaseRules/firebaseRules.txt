@@ -2,7 +2,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
    	match /usersDetails/{userDetails} {
-    	allow read: if request.auth != null && request.auth.uid == userDetails
+      allow read: if request.auth != null && request.auth.uid == userDetails
+      allow read: if 0 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth
     }
   }
 }
