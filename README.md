@@ -6,9 +6,9 @@ In this example email and password authentication provider is used. Firebase off
 
 ## **Questions to answer:**
 
-1. *How to store ***additional user informations***, besides what is stored in user credential **Firebase.Auth.Credential**?*
-2. *How to add multiple authorization levels and how to store it in ***additional user informations*** ?*
-3. *How to configure **Firebase Auth rules** to meet user authorization levels privileges ?*
+1. How to store ***additional user informations***, besides what is stored in user credential **Firebase.Auth.Credential** ?
+2. How to add multiple authorization levels and how to store it in ***additional user informations*** ?
+3. How to configure **Firebase Auth rules** to meet user authorization levels privileges ?
 
 
 ## **Requirements**
@@ -35,7 +35,7 @@ In this example email and password authentication provider is used. Firebase off
 4. **React Redux** will be used to store local data and will be synced with **Firebase Auth state.**.
 
 ### Prior knowledge
-1. Basic React, Redux knowledge is required to follow code,
+1. Basic Javascript, React, Redux knowledge is required to follow code,
 2. Basic knowledge for following **Firebase** modules/functions is required:
     - **firebase/firestore**
         - collection(),
@@ -48,7 +48,7 @@ In this example email and password authentication provider is used. Firebase off
         - signInWithEmailAndPassword(),
         - createUserWithEmailAndPassword(),
         - onAuthStateChanged(),
-        - signOut()
+        - signOut().
 
 If you are not familiary with prior knowledge requirements please visit links below:
  - [Manage Users in Firebase](https://firebase.google.com/docs/auth/web/manage-users?authuser=0)

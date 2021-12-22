@@ -40,5 +40,18 @@
     "@reduxjs/toolkit": "^1.6.1",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1"
+  },
+  "keywords": [
+    "firebase",
+    "rules",
+    "auth",
+    "react",
+    "redux"
+  ],
+  "author": "Vladimir Pavkovic",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vladimirpavk/react-redux"
   }
 }
