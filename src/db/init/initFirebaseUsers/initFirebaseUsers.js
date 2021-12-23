@@ -3,10 +3,9 @@ import {
     doc
    } from 'firebase/firestore';
   
-import { dbStore } from '../db.js';
-import { createUser } from '../auth.js';
-
-import { randomUsers } from '../../assets/randomUsers.js';
+import { dbStore } from '../../db';
+import { createUser } from '../../aut.';
+import { randomUsers } from '../../../assets/randomUsers';
 
 const getRandomInt = (max, base) => {
 return Math.floor(Math.random() * max) + base;

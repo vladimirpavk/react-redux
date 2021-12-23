@@ -1,2 +1,3 @@
-import { populateDb } from './initFirebaseUsers.js';
+import { populateDb } from './initFirebaseUsers/initFirebaseUsers';
+
 populateDb();
