@@ -1,3 +1,14 @@
-import { populateDb } from './initFirebaseUsers/initFirebaseUsers';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
-populateDb();
+import { firebaseConfig } from './environment';
+
+import { populateFirebase } from './initFirebaseUsers/initFirebaseUsers.js';
+
+const firebaseApp = initializeApp(firebaseConfig);  
+
+export const dbStore = getFirestore(firebaseApp);
+export const auth = getAuth(firebaseApp);
+
+populateFirebase(dbStore, auth);
