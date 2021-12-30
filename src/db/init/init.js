@@ -4,11 +4,17 @@ import { getAuth } from 'firebase/auth';
 
 import { firebaseConfig } from './environment';
 
-import { populateFirebase } from './initFirebaseUsers/initFirebaseUsers.js';
+import { 
+    populateFirebase,
+    changeUsersList 
+} 
+from './initFirebaseUsers/initFirebaseUsers.js';
 
 const firebaseApp = initializeApp(firebaseConfig);  
 
 export const dbStore = getFirestore(firebaseApp);
 export const auth = getAuth(firebaseApp);
 
-populateFirebase(dbStore, auth);
+console.log('Initializing users base...');
+let newUserBase = changeUsersList();
+populateFirebase(dbStore, auth, newUserBase);
