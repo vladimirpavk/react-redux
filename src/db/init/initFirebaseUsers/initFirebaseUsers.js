@@ -4,9 +4,7 @@ import {
    } from 'firebase/firestore';
 
 import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut
+    createUserWithEmailAndPassword
 } from 'firebase/auth'
   
 import { randUsers } from './assets/randomUsers.js';

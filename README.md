@@ -6,7 +6,7 @@ In this example email and password authentication provider is used. Firebase off
 
 ## **Questions to answer:**
 
-1. How to store ***additional user informations***, besides what is stored in user credential **Firebase.Auth.Credential** ?
+1. How to store ***additional user informations***, besides what is stored in user credential **Firebase.Auth.Credential** object?
 2. How to add multiple authorization levels and how to store it in ***additional user informations*** ?
 3. How to configure **Firebase Auth rules** to meet user authorization levels privileges ?
 
@@ -23,10 +23,10 @@ In this example email and password authentication provider is used. Firebase off
 1. Any user can have multiple authorization levels,
 2. Each user can read own ***additional user informations***,
 3. Authorization levels must meet certain criterias as follows:
-    - **Level 0** - can read ***additional user informations*** for any user,
-    - **Level 1** - can delete ***additional user informations*** and **Firebase.Auth. Credential** for any user,
-    - **Level 2** - can create new ***additional user informations*** and **Firebase.Auth. Credential**,
-4. Authorization levels can be combined i.e. [0, 1], can read and delete ***additional user informations*** and **Firebase.Auth.Credential**.
+    - **Level 0** - can read any user's ***additional user informations***,
+    - **Level 1** - can create ***additional user informations*** and **Firebase.Auth. Credential** user,
+    - **Level 2** - can delete any ***additional user informations*** and **Firebase.Auth. Credential** user,    
+4. Authorization levels can be combined i.e. [0, 1], can read and create ***additional user informations*** and **Firebase.Auth.Credential** user.
 
 ### User interface
 1. User interface must be adaptive to each user authorization levels,
@@ -53,3 +53,19 @@ In this example email and password authentication provider is used. Firebase off
 If you are not familiary with prior knowledge requirements please visit links below:
  - [Manage Users in Firebase](https://firebase.google.com/docs/auth/web/manage-users?authuser=0)
  - [Authenticate with Firebase using Password-Based Accounts using Javascript](https://firebase.google.com/docs/auth/web/password-auth?authuser=0)
+ - [Security Rules language](https://firebase.google.com/docs/rules/rules-language)
+
+ ## Initialize dummy data
+ 1. Go to ..../react-redux/src/db/init folder
+ 2. npm install
+ 3. Create **environment.js** module file that contains two exported constants:
+    - **firebaseConfig** - contains firebase application configuration object(pointing to a firebase app/database)
+    - **firebaseDefaultUserPassword** - contains default user's password, for simplicity it is by default the same for all dummy users
+4. npm start
+5. Wait until *'All ok... Firebase initialized'* message is displayed.
+6. You are now good to go. We have setup Firebase Authentication/Users, a list of users handled by Firebase, and a new collection */{database}/usersCollection* containing additional user information all meet previously mentioned requirements.
+7. **Firebase users** ![Firebase users]('./md_assets/pic_firebase_users.jpg)
+8. **Additional users infromation** ![Additional users information]('./md_assets/pic_aui.jpg)
+
+
+## *...to be continued*

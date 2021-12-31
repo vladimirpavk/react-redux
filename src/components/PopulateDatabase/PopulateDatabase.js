@@ -7,7 +7,7 @@ import {
 
 import { dbStore } from '../../db/db';
 
-import { randomUsers } from '../../assets/randomUsers';
+import { randomUsers } from '../../db/init/initFirebaseUsers/assets/randomUsers';
 
 import { createUser } from '../../db/auth';
 
