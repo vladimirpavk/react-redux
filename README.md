@@ -64,8 +64,8 @@ If you are not familiary with prior knowledge requirements please visit links be
 4. npm start
 5. Wait until *'All ok... Firebase initialized'* message is displayed.
 6. You are now good to go. We have setup Firebase Authentication/Users, a list of users handled by Firebase, and a new collection */{database}/usersCollection* containing additional user information all meet previously mentioned requirements.
-7. **Firebase users** ![Firebase users]('./md_assets/pic_firebase_users.jpg)
-8. **Additional users infromation** ![Additional users information]('./md_assets/pic_aui.jpg)
+7. **Firebase users** ![Firebase users](./md_assets/pic_firebase_users.jpg)
+8. **Additional users infromation** ![Additional users information](./md_assets/pic_aui.jpg)
 
 
 ## *...to be continued*
