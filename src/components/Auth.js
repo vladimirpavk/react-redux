@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 
-import db from '../db/db';
-import PopulateDb from './PopulateDatabase/PopulateDatabase';
-
 import { loginAsync } from '../store/reducers/loginSlice';
 
 import classes from './Auth.module.css';
@@ -36,15 +33,13 @@ const Auth = (props) => {
           </div>
           <div className={classes.control}>
             <label htmlFor='password'>Password</label>
-            <input type='password' id='password' defaultValue='ncc1701a' />
+            <input type='password' id='password' defaultValue='proba1pass' />
           </div>
           <button type="submit">Login</button>
           {
-            /* showError ?<p className={classes.errorLabel}>* Login error. Please re-enter username and password.</p> : null */
-            showError ? <p className={classes.errorLabel}>* {props.loginFailedText}</p> : null
+            showError ? <p className={classes.errorLabel}>* {errorText}</p> : null
           }          
         </form>
-       { <PopulateDb />}
       </section>
     </main>
   );

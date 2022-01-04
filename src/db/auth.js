@@ -13,7 +13,7 @@ onAuthStateChanged(auth,
             console.log('User logged in...', loggedUser)
         }
         else{
-            console.log('User logged out...');
+            console.log('User is not logged in...');
         }        
     }
 )

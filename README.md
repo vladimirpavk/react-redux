@@ -56,7 +56,7 @@ If you are not familiary with prior knowledge requirements please visit links be
  - [Security Rules language](https://firebase.google.com/docs/rules/rules-language)
 
  ## Initialize dummy data
- 1. Go to ..../react-redux/src/db/init folder
+ 1. Go to ./src/db/init folder
  2. npm install
  3. Create **environment.js** module file that contains two exported constants:
     - **firebaseConfig** - contains firebase application configuration object(pointing to a firebase app/database)

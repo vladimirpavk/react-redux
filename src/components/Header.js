@@ -81,7 +81,7 @@ const Header = (props) => {
  
   return (
     <header className={classes.header}>
-      <h1>Redux Auth - {props.userData.login.username}</h1>
+      <h1>Redux Auth - {userData.email}</h1>
       <nav>
         <ul>
           <li>

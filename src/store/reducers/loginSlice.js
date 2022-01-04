@@ -57,12 +57,6 @@ export const loginAsync = (username, password)=>
         console.log(username, password);
         signInUser(username, password).then(
             (userCredential)=>{
-                /* findUserDetailByUID(userCredential.user.uid).then(
-                    (detailedUser)=>{
-                        console.log(detailedUser);
-                        dispatch(login(detailedUser));
-                    }
-                ) */
                 getUserDocumentById(userCredential.user.uid).then(
                     (userDetailsDocument)=>{
                         console.log(userDetailsDocument);
@@ -72,12 +66,9 @@ export const loginAsync = (username, password)=>
             }
         ).catch(
             (error)=>{
-                //console.log('Something bad happened...', error.code, error.message)
                 dispatch(loginFailed(error.message));
             }
         )
     }
-
-
 
 export default loginSlice.reducer;
