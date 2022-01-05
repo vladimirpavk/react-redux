@@ -25,15 +25,15 @@ const Header = (props) => {
       let retValue;
       switch(authLevel){
         case(0):{
-          retValue = <li key={Math.random()} onClick={getAllUsers} >List Users</li>
+          retValue = <li key={Math.random()} onClick={getAllUsers}>List Users</li>
           break;
         }
         case(1):{
-          retValue = <li key={Math.random()}>Auth1</li>
+          retValue = <li key={Math.random()}>Create new user</li>
           break;
         }
         case(2):{
-          retValue = <li key={Math.random()}>Auth2</li>
+          retValue = <li key={Math.random()}>Delete user</li>
           break;
         }
         case(3):{

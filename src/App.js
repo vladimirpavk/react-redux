@@ -6,13 +6,30 @@ import Header from './components/Header';
 import UserProfile from './components/UserProfile';
 
 function App(props) {
+
+  const listAllUsersClicked = ()=>{
+    console.log('listAllUsersClicked');
+  }
+
+  const deleteUser = () =>{
+    console.log('deleteUser');
+  }
+
+  const createNewUser = ()=>{
+    console.log('createNewUser');
+  }
+
   return (   
     <Fragment>
       {
         props.isLoggedIn ?
         <Fragment>
-            <Header/>
-            {<UserProfile />}
+            <Header
+              deleteUser={deleteUser}
+              listAllUsers={listAllUsersClicked}
+              createNewUser={createNewUser}
+            />
+            <UserProfile />
         </Fragment> : <Auth />  
       }          
     </Fragment>     

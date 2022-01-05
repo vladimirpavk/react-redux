@@ -3,7 +3,9 @@ service cloud.firestore {
   match /databases/{database}/documents {
    	match /usersDetails/{userDetails} {
       allow read: if request.auth != null && request.auth.uid == userDetails
-      allow read: if 0 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth
+      allow read: if (0 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth) && request.auth != null
+      allow create: if 1 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
+      allow delete: if 2 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
     }
   }
 }
