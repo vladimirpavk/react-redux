@@ -2,7 +2,7 @@
 
 It's a security risk and not a good practice to access database server direct from the frontend. You should always accesss your backend first. Check errors and potential security breaches on both ends.
 
-In this example email and password authentication provider is used. Firebase offers many different kind of providers. Firestore database.
+In this example firestore email and password authentication provider is used.
 
 ## **Questions to answer:**
 
@@ -63,9 +63,28 @@ If you are not familiary with prior knowledge requirements please visit links be
     - **firebaseDefaultUserPassword** - contains default user's password, for simplicity it is by default the same for all dummy users
 4. npm start
 5. Wait until *'All ok... Firebase initialized'* message is displayed.
-6. You are now good to go. We have setup Firebase Authentication/Users, a list of users handled by Firebase, and a new collection */{database}/usersCollection* containing additional user information all meet previously mentioned requirements.
-7. **Firebase users** ![Firebase users](./md_assets/pic_firebase_users.jpg)
-8. **Additional users infromation** ![Additional users information](./md_assets/pic_aui.jpg)
+6. You are now good to go. We initialized Firebase Authentication/Users, a list of users handled by Firebase, and a new collection */{database}/usersCollection* containing additional user information all meet previously mentioned requirements.
+7. Change auth array for targeted users to meet your authentication schema,
+8. **Firebase users** ![Firebase users](./md_assets/pic_firebase_users.jpg)
+9. **Additional users infromation** ![Additional users information](./md_assets/pic_aui.jpg)
+
+## Configure firebase rule to meet user authorization levels privileges
+Change your default **Firestore Database** rules to code below:
+`
+    rules_version = '2';
+    service cloud.firestore {
+    match /databases/{database}/documents {
+        match /usersDetails/{userDetails} {
+        allow read: if request.auth != null && request.auth.uid == userDetails
+        allow read: if (0 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth) && request.auth != null
+        allow create: if 1 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
+        allow delete: if 2 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
+        }
+    }
+    }
+`
+Rules can be found in 
+*./react_redux/src/db/firebaseRules/firebaseRules.txt*
 
 
 ## *...to be continued*
