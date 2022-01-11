@@ -70,21 +70,18 @@ If you are not familiary with prior knowledge requirements please visit links be
 
 ## Configure firebase rule to meet user authorization levels privileges
 Change your default **Firestore Database** rules to code below:
-`
-    rules_version = '2';
-    service cloud.firestore {
-    match /databases/{database}/documents {
-        match /usersDetails/{userDetails} {
-        allow read: if request.auth != null && request.auth.uid == userDetails
-        allow read: if (0 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth) && request.auth != null
-        allow create: if 1 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
-        allow delete: if 2 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
-        }
-    }
-    }
-`
-Rules can be found in 
-*./react_redux/src/db/firebaseRules/firebaseRules.txt*
+>    rules_version = '2';
+>    service cloud.firestore {
+>    match /databases/{database}/documents {
+>        match /usersDetails/{userDetails} {
+>        allow read: if request.auth != null && request.auth.uid == userDetails
+>        allow read: if (0 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth) && request.auth != null
+>        allow create: if 1 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
+>        allow delete: if 2 in get(/databases/$(database)/documents/usersDetails/$(request.auth.uid)).data.auth && request.auth != null
+>        }
+>    }
+>    }
+Rules can be found in *./react_redux/src/db/firebaseRules/firebaseRules.txt* file.
 
 
 ## *...to be continued*
