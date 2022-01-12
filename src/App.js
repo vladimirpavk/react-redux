@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 import Auth from './components/Auth';
 import Header from './components/Header';
@@ -20,19 +21,24 @@ function App(props) {
   }
 
   return (   
-    <Fragment>
+    /*<Fragment>
       {
         props.isLoggedIn ?
-        <Fragment>
+         <Fragment>
             <Header
               deleteUser={deleteUser}
               listAllUsers={listAllUsersClicked}
               createNewUser={createNewUser}
             />
             <UserProfile />
-        </Fragment> : <Auth />  
+        </Fragment> : <Auth />           
       }          
-    </Fragment>     
+    </Fragment>  */   
+    <Fragment>
+      <Route path='/auth'>
+        <Auth />
+      </Route>
+    </Fragment>
   );
 }
 
